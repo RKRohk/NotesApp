@@ -8,11 +8,11 @@ import androidx.room.Query
 interface NoteDao {
 
     @Insert
-    fun addNode(note:Note)
+    suspend fun addNode(note:Note)
 
-    @Query("SELECT * FROM note")
-    fun getAllNodes(): List<Note>
+    @Query("SELECT * FROM note ORDER BY id DESC")
+    suspend fun getAllNodes(): List<Note>
 
     @Insert
-    fun addMultipleNotes(vararg note: Note)
+    suspend fun addMultipleNotes(vararg note: Note)
 }
