@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mynotes.R
 import com.example.mynotes.db.Note
@@ -25,6 +26,12 @@ class NotesAdapter(private val notes: List<Note>) : RecyclerView.Adapter<NotesAd
         Log.i("RunningATest",notes[position].title + " " + notes[position].note)
         holder.itemView.text_view_title.text = notes[position].title
         holder.itemView.text_view_note.text = notes[position].note
+
+        holder.itemView.setOnClickListener{
+            val action = HomeFragmentDirections.actionAddNote()
+            action.note = notes[position]
+            Navigation.findNavController(it).navigate(action)
+        }
     }
 
     class NoteViewHolder(view:View) : RecyclerView.ViewHolder(view)
